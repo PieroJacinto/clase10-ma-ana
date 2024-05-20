@@ -13,7 +13,9 @@
         <p class="text-center">Welcome to UdeSA Movies</p>
         
         <!--  nombre de usuario si esta logueado -->        
-        
+        <% if (locals.user) { %>
+            <h2 class="text-center mb-3">Hola <%= locals.user.name %></h2>
+        <% } %>
         <div class="d-flex justify-content-center mb-3">
             <a href="/movies/new" class="btn btn-primary mx-2">Estrenos</a>
             <a href="/movies/recomended" class="btn btn-primary mx-2">Recomendadas</a>
@@ -21,11 +23,16 @@
         </div>
 
         <!-- boton de logout si esta logueado, sino mostrar register y login -->
-        
-        <div class="d-flex justify-content-center mb-3">
-            <a href="/login" class="btn btn-success mx-2">Ingresar</a>
-            <a href="/register" class="btn btn-success mx-2">Registrate</a>
-        </div>
+        <% if (locals.user) { %>
+            <form action="/login/logout" method="post" class="d-flex justify-content-center">
+                <button type="submit" class="btn btn-danger">Logout</button>
+            </form>
+        <% } else { %>
+            <div class="d-flex justify-content-center mb-3">
+                <a href="/login" class="btn btn-success mx-2">Ingresar</a>
+                <a href="/register" class="btn btn-success mx-2">Registrate</a>
+            </div>
+        <% } %>
         
 
         <h2 class="mt-4">Buscar películas</h2>

@@ -45,6 +45,28 @@ app.use(function(req,res,next){
   }
   return next()
 })
+
+app.use(function(req,res,next){
+  //esto solo si tengo una cookie
+  if(req.cookies.userId != undefined && req.session.user == undefined){
+    let idDeLaCookie = req.cookies.userId;
+
+    db.User.findByPk(idDeLaCookie)
+    .then( function(user){
+      console.log("middleare de la cookie trasladando info")
+      req.session.user = user
+      console.log("en la cookie middleware")
+      res.locals.user = user;
+      return next()
+    })    
+    .catch(function(err){
+      console.log("error en cookies", err)
+    })
+  } else {
+    return next()
+  }
+})
+
 app.use('/', indexRouter);
 app.use('/movies', moviesRouter);
 app.use('/register', registerRouter);

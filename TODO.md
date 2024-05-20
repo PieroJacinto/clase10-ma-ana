@@ -27,6 +27,6 @@ proceso de logout
 
 ## 8 hashing
   -- Primero instalamos bcrypt
-  -- luego lo agregamos e el proceso de register
+  -- luego lo agregamos en el proceso de register
   -- luego agregamos validacion en login.
 
